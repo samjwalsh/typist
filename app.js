@@ -1,4 +1,3 @@
-/*jshint esversion: 6 */
 const path = require('path');
 
 const express = require('express');
@@ -9,6 +8,9 @@ const xss = require('xss-clean');
 const hpp = require('hpp');
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
+
+const AppError = require('./utils/appError');
+const viewRouter = require('./routes/viewRoutes');
 
 const app = express();
 
@@ -46,6 +48,6 @@ app.all('*', (req, res, next) => {
     next(new AppError(`Can't find ${req.originalUrl} on this server!`, 404));
 });
 
-app.use(globalErrorHandler);
+//app.use(/*function for handling errors*/);
 
 module.exports = app;
