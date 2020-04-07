@@ -1,4 +1,8 @@
 const dotenv = require('dotenv');
+const fs = require('fs');
+const http = require('http');
+const https = require('https');
+
 dotenv.config({ path: './config.env' });
 
 const app = require('./app');
@@ -11,7 +15,20 @@ process.on('uncaughtException', (err) => {
     process.exit(1);
 });
 
-const port = process.env.PORT || 80;
-const server = app.listen(port, () => {
-    console.log(`HTTP server running on port ${port}`);
-});
+if (process.env.ENABLE_HTTP === 'true') {
+    http.createServer(app).listen(process.env.HTTPS_PORT ? process.env.HTTP_PORT : 80, console.log(`HTTPS server running on port ${process.env.HTTP_PORT}`));
+}
+
+if (process.env.ENABLE_HTTPS === 'true') {
+    https
+        .createServer(
+            {
+                key: fs.readFileSync('./keys/private.key'),
+                cert: fs.readFileSync('./keys/public.key'),
+            },
+            app
+        )
+        .listen(process.env.HTTPS_PORT ? process.env.HTTPS_PORT : 80, () => {
+            console.log(`HTTPS server running on port ${process.env.HTTPS_PORT}`);
+        });
+}
