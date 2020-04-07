@@ -1,1 +1,1 @@
-# clickclack
+# typist
