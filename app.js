@@ -2,7 +2,7 @@ const path = require('path');
 const fs = require('fs');
 const https = require('https');
 
-var compression = require('compression');
+const compression = require('compression');
 const express = require('express');
 const morgan = require('morgan');
 const helmet = require('helmet');
@@ -23,6 +23,8 @@ app.set('views', path.join(__dirname, 'views'));
 
 //GLOBAL MIDDLEWARES
 // Serving static files
+app.use(compression());
+
 app.use(express.static(path.join(__dirname, 'public')));
 
 // Set security HTTP headers
