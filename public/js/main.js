@@ -222,7 +222,7 @@ function showResult() {
             for (i = 0; i < currentWord; i++) {
                 sumKeys += wordList[i].length + 1;
             }
-            acc = acc = Math.min(Math.floor((correctKeys / sumKeys) * 100), 100);
+            acc = acc = Math.min(Math.round((correctKeys / sumKeys) * 100), 100);
     }
     let wpm = Math.floor(words / minute);
     document.querySelector('#right-wing').innerHTML = `WPM: ${wpm} / ACC: ${acc}`;
