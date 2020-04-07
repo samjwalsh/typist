@@ -1,3 +1,6 @@
 exports.getTypingTest = (req, res) => {
-    res.status(200).render('typingTest');
+    //console.log(req.cookies);
+    res.status(200).render('typingTest', {
+        theme: req.cookies.theme ? req.cookies.theme : 'light',
+    });
 };
