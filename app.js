@@ -25,7 +25,7 @@ app.set('views', path.join(__dirname, 'views'));
 // Serving static files
 app.use(compression());
 
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'public'), { maxAge: '7d' }));
 
 // Set security HTTP headers
 app.use(helmet());
