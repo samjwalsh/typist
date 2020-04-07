@@ -1,5 +1,8 @@
 const path = require('path');
+const fs = require('fs');
+const https = require('https');
 
+var compression = require('compression');
 const express = require('express');
 const morgan = require('morgan');
 const helmet = require('helmet');
@@ -12,12 +15,13 @@ const cookieParser = require('cookie-parser');
 const AppError = require('./utils/appError');
 const viewRouter = require('./routes/viewRoutes');
 
+// Creating https server
 const app = express();
 
 app.set('view engine', 'pug');
 app.set('views', path.join(__dirname, 'views'));
 
-// 1) GLOBAL MIDDLEWARES
+//GLOBAL MIDDLEWARES
 // Serving static files
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -25,6 +29,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(helmet());
 
 app.use(cors());
+
+// Use gzip compression
 
 // Development logging
 if (process.env.NODE_ENV === 'development') {

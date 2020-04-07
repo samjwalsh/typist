@@ -4,6 +4,7 @@
   "description": "A modern typing test application",
   "main": "server.js",
   "dependencies": {
+    "compression": "^1.7.4",
     "cookie-parser": "^1.4.5",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
