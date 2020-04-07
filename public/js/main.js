@@ -18,7 +18,7 @@ let timerActive = false;
 let punctuation = false;
 
 // Get cookies
-getCookie('theme') === '' ? setTheme('dots') : setTheme(getCookie('theme'));
+// getCookie('theme') === '' ? setTheme('dots') : setTheme(getCookie('theme'));
 getCookie('language') === '' ? setLanguage('english') : setLanguage(getCookie('language'));
 getCookie('wordCount') === '' ? setWordCount(50) : setWordCount(getCookie('wordCount'));
 getCookie('timeCount') === '' ? setTimeCount(60) : setTimeCount(getCookie('timeCount'));

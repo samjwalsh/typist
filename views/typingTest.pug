@@ -1,52 +1,53 @@
 doctype html
-head
-  meta(charset='UTF-8')
-  meta(name='viewport' content='width=device-width, initial-scale=1.0')
-  meta(http-equiv='X-UA-Compatible' content='ie=edge')
-  title typings
-  meta(name='description' content='typings.samjw.xyz is a fork of typings.gg, a sleek and modern typing test site with modern minimalist themes. This fork adds more words to the list of possible words and more themes')
-  link(rel='stylesheet' href='css/style.css')
-  //- link#theme(rel='stylesheet' href='css/themes/light.css')
-  link#theme(rel='stylesheet' href='css/themes/light.css')
-  link(rel='icon' href='img/favicon.png')
-h2#header typings
-#command-center
-  .bar
-    #left-wing
-      span#word-count
-        span#wc-10(onclick='setWordCount(10)') 10
-        text  / 
-        span#wc-25(onclick='setWordCount(25)') 25
-        text  / 
-        span#wc-50(onclick='setWordCount(50)') 50
-        text  / 
-        span#wc-100(onclick='setWordCount(100)') 100
-        text  / 
-        span#wc-250(onclick='setWordCount(250)') 250
-      span#time-count
-        span#tc-15(onclick='setTimeCount(15)') 15
-        text  / 
-        span#tc-30(onclick='setTimeCount(30)') 30
-        text  / 
-        span#tc-60(onclick='setTimeCount(60)') 60
-        text  / 
-        span#tc-120(onclick='setTimeCount(120)') 120
-        text  / 
-        span#tc-240(onclick='setTimeCount(240)') 240
-    #right-wing WPM: XX / ACC: XX
-  #typing-area
-    #text-display
+html(lang='en')
+  head
+    meta(charset='UTF-8')
+    meta(name='viewport' content='width=device-width, initial-scale=1.0')
+    meta(http-equiv='X-UA-Compatible' content='ie=edge')
+    title typings
+    meta(name='description' content='typings.samjw.xyz is a fork of typings.gg, a sleek and modern typing test site with modern minimalist themes. This fork adds more words to the list of possible words and more themes')
+    link(rel='stylesheet' href='css/style.css')
+    //- link#theme(rel='stylesheet' href='css/themes/light.css')
+    link#theme(rel='stylesheet' href=`css/themes/${theme}.css`)
+    link(rel='icon' href='img/favicon.png')
+  h2#header typings
+  #command-center
     .bar
-      input#input-field(type='text' spellcheck='false' autocomplete='off' autocorrect='off' autocapitalize='off' tabindex='1')
-      button#redo-button(onclick='setText()' tabindex='2')
-        | redo
-#theme-center.hidden
-  #left-wing(onclick='hideThemeCenter();')
-    | &lt; back
-  #theme-area
-#footer
-  a(href='https://github.com/briano1905/typings#typings' target='_blank' tabindex='3') user guide
-  | /
-  #show-themes.button(onclick='showThemeCenter();' tabindex='4')
-    | themes
-script(src='js/main.js')
+      #left-wing
+        span#word-count
+          span#wc-10(onclick='setWordCount(10)') 10
+          text  / 
+          span#wc-25(onclick='setWordCount(25)') 25
+          text  / 
+          span#wc-50(onclick='setWordCount(50)') 50
+          text  / 
+          span#wc-100(onclick='setWordCount(100)') 100
+          text  / 
+          span#wc-250(onclick='setWordCount(250)') 250
+        span#time-count
+          span#tc-15(onclick='setTimeCount(15)') 15
+          text  / 
+          span#tc-30(onclick='setTimeCount(30)') 30
+          text  / 
+          span#tc-60(onclick='setTimeCount(60)') 60
+          text  / 
+          span#tc-120(onclick='setTimeCount(120)') 120
+          text  / 
+          span#tc-240(onclick='setTimeCount(240)') 240
+      #right-wing WPM: XX / ACC: XX
+    #typing-area
+      #text-display
+      .bar
+        input#input-field(type='text' spellcheck='false' autocomplete='off' autocorrect='off' autocapitalize='off' tabindex='1')
+        button#redo-button(onclick='setText()' tabindex='2')
+          | redo
+  #theme-center.hidden
+    #left-wing(onclick='hideThemeCenter();')
+      | &lt; back
+    #theme-area
+  #footer
+    a(href='https://github.com/briano1905/typings#typings' target='_blank' tabindex='3' rel='noreferrer') user guide
+    | /
+    #show-themes.button(onclick='showThemeCenter();' tabindex='4')
+      | themes
+  script(src='js/main.js')
