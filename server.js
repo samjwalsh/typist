@@ -2,9 +2,13 @@ const dotenv = require('dotenv');
 const fs = require('fs');
 const http = require('http');
 const https = require('https');
+const mongoose = require('mongoose');
 
-dotenv.config({ path: './config.env' });
-
+try {
+    dotenv.config({ path: './config.env' });
+} catch (e) {
+    console.log('Found no config.env file');
+}
 const app = require('./app');
 
 process.on('uncaughtException', (err) => {
@@ -14,6 +18,15 @@ process.on('uncaughtException', (err) => {
 
     process.exit(1);
 });
+
+mongoose
+    .connect(process.env.DATABASE, {
+        useNewUrlParser: true,
+        useCreateIndex: true,
+        useFindAndModify: false,
+        useUnifiedTopology: true,
+    })
+    .then(() => console.log('DB Connected'));
 
 if (process.env.ENABLE_HTTP === 'true') {
     http.createServer(app).listen(process.env.HTTPS_PORT ? process.env.HTTP_PORT : 80, console.log(`HTTPS server running on port ${process.env.HTTP_PORT}`));
