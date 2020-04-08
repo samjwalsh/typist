@@ -38,7 +38,7 @@ app.use(compression());
 if (process.env.NODE_ENV === 'development') {
     app.use(morgan('dev'));
 } else {
-    app.use(morgan('tiny'));
+    app.use(morgan(':method :url :status :response-time ms :date'));
 }
 
 // Body parser, reading data from body into req.body
