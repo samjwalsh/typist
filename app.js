@@ -22,9 +22,8 @@ app.set('view engine', 'pug');
 app.set('views', path.join(__dirname, 'views'));
 
 //GLOBAL MIDDLEWARES
-// Serving static files
-app.use(compression());
 
+// Serving static files
 app.use(express.static(path.join(__dirname, 'public'), { maxAge: '7d' }));
 
 // Set security HTTP headers
@@ -33,10 +32,13 @@ app.use(helmet());
 app.use(cors());
 
 // Use gzip compression
+app.use(compression());
 
 // Development logging
 if (process.env.NODE_ENV === 'development') {
     app.use(morgan('dev'));
+} else {
+    app.use(morgan('tiny'));
 }
 
 // Body parser, reading data from body into req.body
@@ -53,7 +55,9 @@ app.use(xss());
 app.use('/', viewRouter);
 
 app.all('*', (req, res, next) => {
-    next(new AppError(`Can't find ${req.originalUrl} on this server!`, 404));
+    console.log(`Can't find ${req.originalUrl} on this server.`);
+    next();
+    //next(new AppError(`Can't find ${req.originalUrl} on this server!`, 404));
 });
 
 //app.use(/*function for handling errors*/);
