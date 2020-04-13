@@ -1,14 +1,15 @@
 const mongoose = require('mongoose');
 
-const statsSchema = new mongoose.Schema({
-    testType: {
-        type: String,
-        required: true,
+const statsSchema = new mongoose.Schema(
+    {
+        testType: {
+            type: String,
+            required: true,
+        },
+        results: [],
     },
-    results: {
-        type: Object,
-    },
-});
+    { strict: false }
+);
 
 const Stats = mongoose.model('stats', statsSchema);
 

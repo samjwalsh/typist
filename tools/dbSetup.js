@@ -18,11 +18,19 @@ const gamemodes = ['wordCount_10', 'wordCount_25', 'wordCount_50', 'wordCount_10
 
 // let results = new Array();
 
-gamemodes.forEach(async (name) => {
+gamemodes.forEach((name) => {
     Stats.create({
         testType: name,
-        results: {},
+        results: [],
     });
 });
 
-//Stats.create();
+gamemodes.forEach(async (name) => {
+    for (let i = 1; i <= 300; i++) {    
+        const doc = await Stats.findOne({ testType: name });
+
+        doc.results.push(0);
+
+        doc.save();
+    }
+});

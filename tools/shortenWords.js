@@ -1,7 +1,8 @@
 const fs = require('fs');
 
-let words = JSON.parse(fs.readFileSync(`${__dirname}/random.json`, 'utf-8'))
-    .english;
+let words = JSON.parse(fs.readFileSync(`${__dirname}/wordList.json`, 'utf-8')).english;
+
+console.log(typeof words);
 
 const capWords = (words, min, max) => {
     let result = new Array();
@@ -14,8 +15,8 @@ const capWords = (words, min, max) => {
     return result;
 };
 
-let newWords = JSON.stringify(capWords(words, 3, 12));
+let newWords = JSON.stringify(capWords(words, 3, 10));
 
 console.log(newWords.length);
 
-fs.writeFileSync('words.json', newWords);
+fs.writeFileSync(`${__dirname}/wordListNew.json`, newWords);
