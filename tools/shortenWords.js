@@ -15,7 +15,7 @@ const capWords = (words, min, max) => {
     return result;
 };
 
-let newWords = JSON.stringify(capWords(words, 3, 10));
+let newWords = JSON.stringify(capWords(words, 3, 8));
 
 console.log(newWords.length);
 
