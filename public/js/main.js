@@ -6,6 +6,7 @@ const inputField = document.querySelector('#input-field');
 let typingMode = 'wordcount';
 let wordCount;
 let timeCount;
+let avgWordLength = 5;
 
 // Initialize dynamic variables
 let randomWords = [];
@@ -208,7 +209,7 @@ function showResult() {
     let words, minute, acc;
     switch (typingMode) {
         case 'wordcount':
-            words = correctKeys / 5;
+            words = correctKeys / avgWordLength;
             minute = (Date.now() - startDate) / 1000 / 60;
             let totalKeys = -1;
             wordList.forEach((e) => (totalKeys += e.length + 1));
@@ -216,7 +217,7 @@ function showResult() {
             break;
 
         case 'time':
-            words = correctKeys / 5;
+            words = correctKeys / avgWordLength;
             minute = timeCount / 60;
             let sumKeys = -1;
             for (i = 0; i < currentWord; i++) {

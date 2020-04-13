@@ -8,12 +8,13 @@ const morgan = require('morgan');
 const helmet = require('helmet');
 const mongoSanitize = require('express-mongo-sanitize');
 const xss = require('xss-clean');
-const hpp = require('hpp');
+// const hpp = require('hpp');
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
 
 const AppError = require('./utils/appError');
-const viewRouter = require('./routes/viewRoutes');
+const viewRoutes = require('./routes/viewRoutes');
+const statsRoutes = require('./routes/statsRoutes');
 
 // Creating https server
 const app = express();
@@ -38,7 +39,7 @@ app.use(compression());
 if (process.env.NODE_ENV === 'development') {
     app.use(morgan('dev'));
 } else {
-    app.use(morgan(':method :url :status :response-time ms :date'));
+    app.use(morgan(':method :total-time ms :date :url'));
 }
 
 // Body parser, reading data from body into req.body
@@ -52,10 +53,11 @@ app.use(mongoSanitize());
 // Data sanitization against XSS
 app.use(xss());
 
-app.use('/', viewRouter);
+app.use('/', viewRoutes);
+app.use('/api/v1/stats', statsRoutes);
 
 app.all('*', (req, res, next) => {
-    console.log(`Can't find ${req.originalUrl} on this server.`);
+    //console.log(`Can't find ${req.originalUrl} on this server.`);
     next();
     //next(new AppError(`Can't find ${req.originalUrl} on this server!`, 404));
 });
