@@ -8,6 +8,7 @@ try {
     dotenv.config({ path: './config.env' });
 } catch (e) {
     console.log('Found no config.env file');
+    process.exit(1);
 }
 const app = require('./app');
 

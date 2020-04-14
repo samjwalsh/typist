@@ -1,14 +1,12 @@
 const path = require('path');
-const fs = require('fs');
-const https = require('https');
 
 const compression = require('compression');
 const express = require('express');
 const morgan = require('morgan');
 const helmet = require('helmet');
 const mongoSanitize = require('express-mongo-sanitize');
+const rateLimit = require('express-rate-limit');
 const xss = require('xss-clean');
-// const hpp = require('hpp');
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
 
@@ -16,7 +14,6 @@ const AppError = require('./utils/appError');
 const viewRoutes = require('./routes/viewRoutes');
 const statsRoutes = require('./routes/statsRoutes');
 
-// Creating https server
 const app = express();
 
 app.set('view engine', 'pug');
@@ -52,6 +49,24 @@ app.use(mongoSanitize());
 
 // Data sanitization against XSS
 app.use(xss());
+
+// // Rate Limiting
+// const apiLimiter = rateLimit({
+//     windowMs: 60 * 1000,
+//     max: 6,
+// });
+
+// // TODO implement rate limiting, but api uses same route for getting stats so rate limiting will apply to the results graph
+
+// app.use('/api/v1/stats', (req, res, next) => {
+//     console.log(req.method);
+//     if (req.method == 'POST') {
+//         console.log('here');
+//         app.use(apiLimiter);
+//     }
+
+//     return next();
+// });
 
 app.use('/', viewRoutes);
 app.use('/api/v1/stats', statsRoutes);

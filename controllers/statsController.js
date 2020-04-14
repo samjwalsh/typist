@@ -1,7 +1,7 @@
 const Stats = require('./../models/statsModel');
 
 // TODO Sanitize wpm input so it is forsure only a number
-// TODO put limit on number of tests that can be submitted a limit
+
 exports.getStats = async (req, res, next) => {
     try {
         let testType = req.params.testType;
