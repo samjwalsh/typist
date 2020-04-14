@@ -50,23 +50,21 @@ app.use(mongoSanitize());
 // Data sanitization against XSS
 app.use(xss());
 
-// // Rate Limiting
-// const apiLimiter = rateLimit({
-//     windowMs: 60 * 1000,
-//     max: 6,
-// });
+// Rate Limiting
+const apiLimiter = rateLimit({
+    windowMs: 60 * 1000,
+    max: 6,
+});
 
-// // TODO implement rate limiting, but api uses same route for getting stats so rate limiting will apply to the results graph
+// TODO Fix rate limiting, it doesn't work
 
-// app.use('/api/v1/stats', (req, res, next) => {
-//     console.log(req.method);
-//     if (req.method == 'POST') {
-//         console.log('here');
-//         app.use(apiLimiter);
-//     }
+app.use('/api/v1/stats', (req, res, next) => {
+    if (req.method == 'POST') {
+        app.use(apiLimiter);
+    }
 
-//     return next();
-// });
+    return next();
+});
 
 app.use('/', viewRoutes);
 app.use('/api/v1/stats', statsRoutes);
