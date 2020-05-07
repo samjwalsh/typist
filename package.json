@@ -19,7 +19,9 @@
         "pug": "^2.0.4",
         "xss-clean": "^0.1.1"
     },
-    "devDependencies": {},
+    "devDependencies": {
+        "eslint": "^6.8.0"
+    },
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
         "start": "node server.js"
