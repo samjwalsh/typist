@@ -30,7 +30,7 @@ mongoose
     .then(() => console.log('DB Connected'));
 
 if (process.env.ENABLE_HTTP === 'true') {
-    http.createServer(app).listen(process.env.HTTPS_PORT ? process.env.HTTP_PORT : 80, console.log(`HTTPS server running on port ${process.env.HTTP_PORT}`));
+    http.createServer(app).listen(process.env.HTTPS_PORT ? process.env.HTTP_PORT : 80, console.log(`HTTP server running on port ${process.env.HTTP_PORT}`));
 }
 
 if (process.env.ENABLE_HTTPS === 'true') {
@@ -42,7 +42,7 @@ if (process.env.ENABLE_HTTPS === 'true') {
             },
             app
         )
-        .listen(process.env.HTTPS_PORT ? process.env.HTTPS_PORT : 80, () => {
+        .listen(process.env.HTTPS_PORT ? process.env.HTTPS_PORT : 443, () => {
             console.log(`HTTPS server running on port ${process.env.HTTPS_PORT}`);
         });
 }
